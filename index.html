@@ -94,39 +94,183 @@
     </div>
 
     <script>
+<script>
 
-        function startQuiz() {
-    document.getElementById("quiz").classList.remove("hidden");
+    let currentQuestion = 0;
+    let userAnswers = [];
 
-    document.querySelector(".card > h2").style.display = "none";
-    document.querySelector(".card > p").style.display = "none";
-    document.querySelector(".card > button").style.display = "none";
+    const questions = [
+        {
+            question: "¿Qué buscas ahorita?",
+            answers: [
+                ["🎭", "Drama — llorar y gritar a la pantalla"],
+                ["🔪", "Thriller / True crime / misterio — quiero suspenso y misterio"],
+                ["😂", "Comedia — quiero pasar un buen rato riendo"],
+                ["🐉", "Algo raro, sci-fi/fantasía — quiero desconectarme de la realidad"]
+            ]
+        },
 
-    document.getElementById("question").textContent =
-        "¿Qué buscas ahorita?";
+        {
+            question: "¿Qué te hace no soltar un libro?",
+            answers: [
+                ["🧩", "Tener que armar el rompecabezas, necesito respuestas."],
+                ["🫂", "Encariñarme con un personaje."],
+                ["🌌", "Que el mundo sea tan inmersivo que me olvide del mío."],
+                ["📚", "Que me cuente algo real."]
+            ]
+        },
 
-    document.getElementById("answers").innerHTML = `
-        <button onclick="selectAnswer('🎭')">
-            🎭 Drama — llorar y gritar a la pantalla
-        </button>
+        {
+            question: "¿Qué tan importante es el romance?",
+            answers: [
+                ["🚨", "PRIORIDAD NACIONAL."],
+                ["💕", "Me gusta, pero necesito una historia además del romance."],
+                ["💌", "Un poquito está bien."],
+                ["🚫", "Preferiría que los personajes ni se miraran románticamente."]
+            ]
+        },
 
-        <button onclick="selectAnswer('🔪')">
-            🔪 Thriller / True crime / misterio — suspenso y misterio
-        </button>
+        {
+            question: "¿Qué nivel de daño autorizas?",
+            answers: [
+                ["🥰", "Nada, vengo a pasar un buen rato."],
+                ["🥲", "Un poco, lágrima contenida o un pequeño susto."],
+                ["☠️", "Destrúyeme, quiero un impacto."]
+            ]
+        },
 
-        <button onclick="selectAnswer('😂')">
-            😂 Comedia — pasar un buen rato riendo
-        </button>
+        {
+            question: "¿Cuánto compromiso quieres?",
+            answers: [
+                ["⚡️", "One night stand — menos de 200 páginas."],
+                ["📖", "Algo serio — 300 a 400 páginas."],
+                ["💍", "Compromiso — 400+ páginas o sagas."]
+            ]
+        },
 
-        <button onclick="selectAnswer('🐉')">
-            🐉 Algo raro, sci-fi/fantasía — desconectarme de la realidad
-        </button>
-    `;
-}
-        function selectAnswer(answer) {
-    alert("Elegiste: " + answer);
-}
+        {
+            question: "¿Qué tan paciente eres con un libro?",
+            answers: [
+                ["⚔️", "Dame acción YA."],
+                ["⏳", "Puedo esperar, pero quiero que valga la pena."],
+                ["🕰️", "Me encanta cuando la historia se toma su tiempo."],
+                ["😵", "Si en 30 páginas no pasó nada, lo abandono emocionalmente."]
+            ]
+        },
 
+        {
+            question: "¿Cómo te gusta que sea el protagonista?",
+            answers: [
+                ["🩶", "Moralmente gris."],
+                ["😇", "Buena persona."],
+                ["🗺️", "No me importa, me interesa el world building."]
+            ]
+        },
+
+        {
+            question: "¿Cómo te gusta que te cuenten la historia?",
+            answers: [
+                ["📝", "Que me cuente quien lo vivió, quiero la historia de primera mano."],
+                ["🤫", "Que me cuente alguien que lo vio o lo conoció, como un buen cuenta cuentos."],
+                ["👻", "Quiero saber todo, cada detalle, cada pensamiento y sentimiento."]
+            ]
+        },
+
+        {
+            question: "¿Qué final te gusta?",
+            answers: [
+                ["💔", "Que me deje mal por días pero que sea un buen recuerdo."],
+                ["🌓", "Agridulce / Realista."],
+                ["☀️", "Feliz, quiero mi happy ever after."]
+            ]
+        },
+
+        {
+            question: "¿Qué tan atrás en el tiempo viajarás?",
+            answers: [
+                ["🏛️", "Lejos, reyes y castillos."],
+                ["🪖", "Cerca, guerras / siglo pasado."],
+                ["💻", "Actual, aquí y ahora."],
+                ["✨", "Mundo totalmente nuevo."]
+            ]
+        },
+
+        {
+            question: "¿Cuál es una red flag en un libro?",
+            answers: [
+                ["🫩", "Que sea lento, pasan páginas y páginas y aún no hay nada."],
+                ["🙄", "Que los personajes no piensen y me desesperen."],
+                ["😑", "Que sea predecible. “Seguro va a pasar esto… oh… sip”"]
+            ]
+        },
+
+        {
+            question: "¿Qué estás viviendo ahorita?",
+            answers: [
+                ["🥀", "Tengo el corazón roto / extraño a alguien."],
+                ["🔮", "Estoy perdido / en crisis existencial."],
+                ["🔥", "Quiero motivarme."],
+                ["😆", "Necesito reírme y olvidarme de todo."],
+                ["✈️", "Quiero viajar sin salir de mi casa."],
+                ["👤", "Quiero entender más a la gente."]
+            ]
+        }
+    ];
+
+    function startQuiz() {
+        document.getElementById("quiz").classList.remove("hidden");
+
+        document.querySelector(".card > h2").style.display = "none";
+        document.querySelector(".card > p").style.display = "none";
+        document.querySelector(".card > button").style.display = "none";
+
+        showQuestion();
+    }
+
+    function showQuestion() {
+        document.getElementById("question").textContent =
+            questions[currentQuestion].question;
+
+        document.getElementById("answers").innerHTML =
+            questions[currentQuestion].answers.map(option => `
+                <button onclick="selectAnswer('${option[0]}')">
+                    ${option[0]} ${option[1]}
+                </button>
+            `).join("");
+    }
+
+    function selectAnswer(answer) {
+        userAnswers.push(answer);
+
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById("question").textContent =
+            "¡Terminaste! 📚✨";
+
+        document.getElementById("answers").innerHTML = `
+            <p>
+                Ya tenemos tus 12 respuestas.
+            </p>
+
+            <p>
+                Ahora podemos buscar tu Book Match.
+            </p>
+        `;
+
+        console.log("Respuestas:", userAnswers);
+    }
+
+</script>
+
+      
     </script>
 
 </body>
