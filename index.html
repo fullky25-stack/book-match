@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Match 📚</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f3ee;
+            color: #2f2f2f;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        button {
+            background-color: #2f2f2f;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📚 Book Match</h1>
+
+        <p class="subtitle">
+            Encuentra el libro que más va contigo.
+        </p>
+
+        <div class="card">
+
+            <h2>¿Listo para encontrar tu próximo libro?</h2>
+
+            <p>
+                Responde unas preguntas y descubre qué libro
+                podría ser tu mejor match.
+            </p>
+
+            <button onclick="startQuiz()">
+                Empezar ✨
+            </button>
+
+            <div id="quiz" class="hidden">
+                <h2 id="question"></h2>
+
+                <div id="answers"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function startQuiz() {
+            document.querySelector("h2").textContent =
+                "Aquí aparecerán nuestras preguntas 📖";
+
+            document.querySelector("p").textContent =
+                "Pronto comenzaremos el Book Match.";
+
+            document.querySelector("button").style.display = "none";
+
+            document.getElementById("quiz").classList.remove("hidden");
+        }
+
+    </script>
+
+</body>
+</html>
