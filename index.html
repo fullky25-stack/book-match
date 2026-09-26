@@ -271,6 +271,9 @@ const books = [
     }
 ];
     function startQuiz() {
+          currentQuestion = 0;
+    userAnswers = [];
+
         document.getElementById("quiz").classList.remove("hidden");
 
         document.querySelector(".card > h2").style.display = "none";
