@@ -96,16 +96,36 @@
     <script>
 
         function startQuiz() {
-            document.querySelector("h2").textContent =
-                "Aquí aparecerán nuestras preguntas 📖";
+    document.getElementById("quiz").classList.remove("hidden");
 
-            document.querySelector("p").textContent =
-                "Pronto comenzaremos el Book Match.";
+    document.querySelector(".card > h2").style.display = "none";
+    document.querySelector(".card > p").style.display = "none";
+    document.querySelector(".card > button").style.display = "none";
 
-            document.querySelector("button").style.display = "none";
+    document.getElementById("question").textContent =
+        "¿Qué buscas ahorita?";
 
-            document.getElementById("quiz").classList.remove("hidden");
-        }
+    document.getElementById("answers").innerHTML = `
+        <button onclick="selectAnswer('🎭')">
+            🎭 Drama — llorar y gritar a la pantalla
+        </button>
+
+        <button onclick="selectAnswer('🔪')">
+            🔪 Thriller / True crime / misterio — suspenso y misterio
+        </button>
+
+        <button onclick="selectAnswer('😂')">
+            😂 Comedia — pasar un buen rato riendo
+        </button>
+
+        <button onclick="selectAnswer('🐉')">
+            🐉 Algo raro, sci-fi/fantasía — desconectarme de la realidad
+        </button>
+    `;
+}
+        function selectAnswer(answer) {
+    alert("Elegiste: " + answer);
+}
 
     </script>
 
