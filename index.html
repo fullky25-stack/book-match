@@ -339,6 +339,17 @@ const books = [
 
     console.log("Respuestas:", userAnswers);
 }
+        books.forEach(book => {
+    let score = 0;
+
+    for (let i = 0; i < userAnswers.length; i++) {
+        if (book.code[i].includes(userAnswers[i])) {
+            score++;
+        }
+    }
+
+    console.log(book.name + ": " + score + " coincidencias");
+});
 
 </script>
 
