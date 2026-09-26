@@ -215,7 +215,61 @@
             ]
         }
     ];
+const books = [
+    {
+        name: "The Hermit Thrush Sings",
+        code: [
+            ["🐉"],
+            ["🌌"],
+            ["🚫"],
+            ["🥲"],
+            ["📖"],
+            ["⏳"],
+            ["😇"],
+            ["📝"],
+            ["☀️"],
+            ["✨"],
+            ["😑"],
+            ["✈️"]
+        ]
+    },
 
+    {
+        name: "Divergent",
+        code: [
+            ["🔪", "🐉"],
+            ["🧩", "🫂", "🌌"],
+            ["💕"],
+            ["☠️"],
+            ["💍"],
+            ["⚔️"],
+            ["😇"],
+            ["📝"],
+            ["☀️"],
+            ["✨"],
+            [],
+            ["🔥", "✈️"]
+        ]
+    },
+
+    {
+        name: "El libro de los rostros",
+        code: [
+            ["🔪"],
+            ["🧩"],
+            ["💕"],
+            ["🥲"],
+            ["⚡️"],
+            ["⚔️"],
+            ["😇"],
+            ["📝"],
+            ["🌓"],
+            ["💻"],
+            ["😑"],
+            ["👤"]
+        ]
+    }
+];
     function startQuiz() {
         document.getElementById("quiz").classList.remove("hidden");
 
@@ -251,21 +305,40 @@
     }
 
     function showResults() {
-        document.getElementById("question").textContent =
-            "¡Terminaste! 📚✨";
 
-        document.getElementById("answers").innerHTML = `
-            <p>
-                Ya tenemos tus 12 respuestas.
-            </p>
+    let bestBook = null;
+    let bestScore = -1;
 
-            <p>
-                Ahora podemos buscar tu Book Match.
-            </p>
-        `;
+    books.forEach(book => {
 
-        console.log("Respuestas:", userAnswers);
-    }
+        let score = 0;
+
+        for (let i = 0; i < userAnswers.length; i++) {
+
+            if (book.code[i].includes(userAnswers[i])) {
+                score++;
+            }
+
+        }
+
+        if (score > bestScore) {
+            bestScore = score;
+            bestBook = book;
+        }
+    });
+
+    document.getElementById("question").textContent =
+        "¡Tu Book Match es! 📚✨";
+
+    document.getElementById("answers").innerHTML = `
+        <h2>${bestBook.name}</h2>
+        <p>
+            Coincidencias: ${bestScore} de 12
+        </p>
+    `;
+
+    console.log("Respuestas:", userAnswers);
+}
 
 </script>
 
