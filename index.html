@@ -237,7 +237,7 @@ const books = [
 
     {
         name: "Divergent",
-        available: 1,
+        available: 0,
         code: [
             ["🔪", "🐉"],
             ["🧩", "🫂", "🌌"],
@@ -316,7 +316,9 @@ const books = [
     let bestScore = -1;
 
     books.forEach(book => {
-
+        
+            if (book.available === 0) return;
+        
         let score = 0;
 
         for (let i = 0; i < userAnswers.length; i++) {
