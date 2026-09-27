@@ -95,15 +95,15 @@
     </div>
 
     <script>
-        const SUPABASE_URL = "sb_publishable_ZsPg5a6F6jtbrigDVyJczw_zPj0DdBQ";
-const SUPABASE_KEY = "https://fhoqbeqnluzfixkqiuud.supabase.co/rest/v1/";
+     const SUPABASE_URL = "https://fhoqbeqnluzfixkqiuud.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_ZsPg5a6F6jtbrigDVyJczw_zPj0DdBQ";
 
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 async function testSupabase() {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from("books")
         .select("*");
 
