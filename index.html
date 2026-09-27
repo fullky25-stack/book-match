@@ -312,13 +312,13 @@ const books = [
 
     function showResults() {
 
-    let bestBook = null;
+    let bestBooks = [];
     let bestScore = -1;
 
     books.forEach(book => {
-        
-            if (book.available === 0) return;
-        
+
+        if (book.available === 0) return;
+
         let score = 0;
 
         for (let i = 0; i < userAnswers.length; i++) {
@@ -331,7 +331,10 @@ const books = [
 
         if (score > bestScore) {
             bestScore = score;
-            bestBook = book;
+            bestBooks = [book];
+        } 
+        else if (score === bestScore) {
+            bestBooks.push(book);
         }
     });
 
@@ -339,7 +342,7 @@ const books = [
         "¡Tu Book Match es! 📚✨";
 
     document.getElementById("answers").innerHTML = `
-        <h2>${bestBook.name}</h2>
+        <h2>${bestBooks.map(book => book.name).join(" + ")}</h2>
         <p>
             Coincidencias: ${bestScore} de 12
         </p>
@@ -347,6 +350,7 @@ const books = [
 
     console.log("Respuestas:", userAnswers);
 }
+
         
    
 </script>
