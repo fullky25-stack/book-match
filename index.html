@@ -58,7 +58,6 @@
             display: none;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -95,22 +94,7 @@
     </div>
 
     <script>
-     const SUPABASE_URL = "https://fhoqbeqnluzfixkqiuud.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ZsPg5a6F6jtbrigDVyJczw_zPj0DdBQ";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-async function testSupabase() {
-    const { data, error } = await supabaseClient
-        .from("books")
-        .select("*");
-
-    console.log("Supabase:", data, error);
-}
-
-testSupabase();
     let currentQuestion = 0;
     let userAnswers = [];
 
@@ -861,7 +845,70 @@ testSupabase();
             ["🔪"], ["🧩"], ["💕"], ["🥲"], ["⚡️"], ["⚔️"],
             ["😇"], ["📝"], ["🌓"], ["💻"], ["😑"], ["👤"]
         ]
-    }
+    },
+        
+        {
+        name: "A Good Girl's Guide to Murder",
+        available: 1,
+        code: [
+            ["🔪"], ["🧩"], ["💌"], ["☠️"], ["💍"], ["⚔️"],
+            ["😇"], ["📝"], ["🌓"], ["💻"], ["😑"], ["🔮"]
+        ]
+    },
+
+    {
+        name: "Better Than the Movies",
+        available: 1,
+        code: [
+            ["😂"], ["🫂"], ["🚨"], ["🥰"], ["📖"], ["⏳"],
+            ["😇"], ["📝"], ["☀️"], ["💻"], ["😑"], ["🥀"]
+        ]
+    },
+
+    {
+        name: "Wonder",
+        available: 1,
+        code: [
+            ["🎭"], ["🫂"], ["💌"], ["🥲"], ["📖"], ["⏳"],
+            ["😇"], ["📝"], ["☀️"], ["💻"], ["🙄"], ["👤"]
+        ]
+    },
+
+    {
+        name: "Auggie & Me: Three Wonder Stories",
+        available: 1,
+        code: [
+            ["🎭"], ["🫂"], ["🚫"], ["🥲"], ["📖"], ["⏳"],
+            ["🗺️"], ["📝"], ["☀️"], ["💻"], ["🙄"], ["👤"]
+        ]
+    },
+
+    {
+        name: "Holes",
+        available: 1,
+        code: [
+            ["🔪"], ["🧩", "🫂"], ["🚫"], ["🥲", "☠️"], ["📖"], ["⚔️"],
+            ["😇"], ["👻"], ["☀️"], ["💻", "🪖"], [], ["🔥", "👤"]
+        ]
+    },
+
+    {
+        name: "Robada. Una carta a mi captor",
+        available: 1,
+        code: [
+            ["🔪"], ["🫂"], ["💕"], ["☠️"], ["📖"], ["⏳"],
+            ["🩶"], ["📝"], ["🌓"], ["💻"], ["😑"], ["🔮"]
+        ]
+    },
+
+    {
+        name: "Maus: La historia de un sobreviviente",
+        available: 1,
+        code: [
+            ["📚"], ["📚"], ["🚫"], ["☠️"], ["📖"], ["⏳"],
+            ["🗺️"], ["📝", "👻"], ["🌓"], ["🪖"], ["🫩"], ["👤"]
+        ]
+    },
 ];
     function startQuiz() {
           currentQuestion = 0;
@@ -906,6 +953,7 @@ testSupabase();
     let bestScore = -1;
 
     books.forEach(book => {
+        if (book.available === 0) return;
 
         let score = 0;
 
